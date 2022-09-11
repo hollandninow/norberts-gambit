@@ -69,7 +69,7 @@
               required
             />
             <select class="input-field input-dropdown input--brokerage">
-              <option value="none">Select one...</option>
+              <option value="none">Select one (optional)</option>
               <option value="bmo">BMO</option>
               <option value="cibc">CIBC</option>
               <option value="rbc">RBC</option>
@@ -91,11 +91,20 @@
               </ion-icon>
               <span class="info-pop-up fx-pop-up"
                 >The auto-populated USD/CAD rate is the Bank of Canada rate with
-                a 2.5% broker fee added.</span
+                a 2.5% broker fee added by default. You can input a custom % fee
+                in the box next to the USD/CAD rate.</span
               >
             </div>
           </div>
-          <input class="input-field input--fx-rate" type="text" required />
+          <div class="fx-double-input-container">
+            <input class="input-field input--fx-rate" type="text" required />
+            <input
+              class="input-field input--fx-fee"
+              type="text"
+              placeholder="Input % fee charged (e.g. 2.5)"
+              required
+            />
+          </div>
         </div>
 
         <div class="input-row">

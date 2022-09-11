@@ -9,6 +9,7 @@ const inputFxCurr = document.querySelector('.input--fx-curr');
 const inputCommission = document.querySelector('.input--commission');
 const selectBrokerage = document.querySelector('.input--brokerage');
 const inputFxRate = document.querySelector('.input--fx-rate');
+const inputFxFee = document.querySelector('.input--fx-fee');
 const inputDlrPrice = document.querySelector('.input--dlr-price');
 const inputDlrUPrice = document.querySelector('.input--dlru-price');
 
@@ -76,7 +77,7 @@ class App {
   #dlruTicker = 'DLR.U';
   #usdCadCode = 'FXUSDCAD';
   #cadUsdCode = 'FXCADUSD';
-  #fxPremium = 0.025;
+  #fxFee = 0.025;
 
   #fxCurr;
   #cadUsdRateSell;
@@ -85,7 +86,6 @@ class App {
   #dlrPriceBid;
   #dlruPriceAsk;
   #dlruPriceBid;
-  #tradeFee;
 
   #feeSchedule = {
     bmo: 9.95,
@@ -106,6 +106,7 @@ class App {
 
     selectBrokerage.addEventListener('change', this._updateTradeFee.bind(this));
     inputFxCurr.addEventListener('change', this._updateFxCurr.bind(this));
+    inputFxFee.addEventListener('change', this._updateFxFee.bind(this));
     btnCalculate.addEventListener('click', this._convertFunds.bind(this));
     btnRefresh.addEventListener('click', this.updateMarketData.bind(this));
   }
@@ -119,7 +120,6 @@ class App {
       this.#dlrPriceBid = await this._getEtfPrice(this.#dlrTicker, false);
       this.#dlruPriceBid = await this._getEtfPrice(this.#dlruTicker, false);
     } catch (err) {
-      // TO DO
       console.error(`Error: ${err} 💥`);
     }
 
@@ -202,6 +202,12 @@ class App {
     this.updateMarketData();
   }
 
+  _updateFxFee() {
+    this.#fxFee = parseFloat(inputFxFee.value) / 100;
+
+    this.updateMarketData();
+  }
+
   async _getFxRate(fxCode, sellCad = true) {
     try {
       const res = await fetch(`${FX_URL}observations/${fxCode}/json?recent=1`);
@@ -213,8 +219,8 @@ class App {
           : +data.observations[0].FXCADUSD.v;
 
       return sellCad
-        ? (fxRate * (1 - this.#fxPremium)).toFixed(4)
-        : (fxRate * (1 + this.#fxPremium)).toFixed(4);
+        ? (fxRate * (1 - this.#fxFee)).toFixed(4)
+        : (fxRate * (1 + this.#fxFee)).toFixed(4);
     } catch (err) {
       // Temporary
       console.error(`Error: ${err} 💥`);

@@ -198,12 +198,12 @@ header {
 }
 
 .fx-pop-up {
-  top: -490%;
+  top: -745%;
   left: 21.8%;
 }
 
 .fx-pop-up:after {
-  top: 95%;
+  top: 97%;
   left: 10%;
 }
 
@@ -234,6 +234,20 @@ header {
 .dropdown-input-container {
   display: flex;
   gap: 3.2rem;
+}
+
+.fx-double-input-container {
+  display: flex;
+  gap: 3.2rem;
+}
+
+.input--fx-rate {
+  width: 100%;
+}
+
+.input--fx-fee {
+  width: 49%;
+  margin-right: 3.5%;
 }
 
 .btn-container {
