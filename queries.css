@@ -1,0 +1,32 @@
+/* Screens below 1200px */
+@media (max-width: 75em) {
+  html {
+    font-size: 50%;
+  }
+}
+
+/* Screens below 1104px */
+@media (max-width: 69em) {
+  .container {
+    grid-template-columns: 1fr;
+    row-gap: 8rem;
+  }
+
+  .action-icon {
+    display: none;
+  }
+}
+
+/* Screens below 656px */
+@media (max-width: 41em) {
+  html {
+    font-size: 40%;
+  }
+}
+
+/* Screens below 480px */
+@media (max-width: 30em) {
+  html {
+    font-size: 35%;
+  }
+}

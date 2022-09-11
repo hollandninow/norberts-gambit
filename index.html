@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Rubik:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="queries.css" />
+    <link rel="shortcut icon" type="image/png" href="#" />
+    <script defer src="script.js"></script>
+    <title>Norbert's Gambit Calculator</title>
+  </head>
+  <body>
+    <header>
+      <h1 class="main-header">Norbert's Gambit Calculator</h1>
+      <a class="header-link" href="#accordion">
+        <ion-icon class="header-icon" name="help-circle-outline"></ion-icon>
+      </a>
+    </header>
+
+    <div class="container">
+      <div class="input-container">
+        <h2>Inputs</h2>
+
+        <div class="input-row">
+          <!-- <label class="input-label">How much do you wish to convert?</label> -->
+          <div class="conversion-input-container">
+            <input
+              class="input-field input--conversion-amt"
+              type="text"
+              placeholder="Enter amount of funds to convert"
+              required
+            />
+            <select class="input-field input-dropdown input--fx-curr">
+              <option value="CAD">CAD</option>
+              <option value="USD">USD</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- <p class="input-text">
+          Enter the prices and rates from your broker below
+        </p> -->
+
+        <div class="input-row">
+          <input
+            class="input-field input--commission"
+            type="text"
+            placeholder="Enter broker trade commission"
+            required
+          />
+        </div>
+
+        <div class="input-row">
+          <div class="fx-label-row">
+            <label class="input-label">USD/CAD rate</label>
+            <div class="hover">
+              <ion-icon class="info-icon" name="information-circle-outline">
+              </ion-icon>
+              <span class="info-pop-up"
+                >The auto-populated USD/CAD rate is the Bank of Canada rate with
+                a 2.5% broker fee added.</span
+              >
+            </div>
+          </div>
+          <input class="input-field input--fx-rate" type="text" required />
+        </div>
+
+        <div class="input-row">
+          <label class="input-label">DLR price</label>
+          <input class="input-field input--dlr-price" type="text" required />
+        </div>
+
+        <div class="input-row">
+          <label class="input-label">DLR.U price</label>
+          <input class="input-field input--dlru-price" type="text" required />
+        </div>
+
+        <div class="btn-container">
+          <button class="btn btn-calculate">
+            <ion-icon class="btn-icon" name="calculator-outline"></ion-icon>
+            Calculate
+          </button>
+
+          <button class="btn btn-refresh" formnovalidate>
+            <ion-icon class="btn-icon" name="refresh-outline"></ion-icon>
+            Refresh market data
+          </button>
+        </div>
+      </div>
+
+      <div class="output-container">
+        <h2 class="output-header">Results</h2>
+
+        <div class="output-row">
+          <p class="output-label">Converted amount:</p>
+          <span class="output-value output--converted-amt">0.00</span>
+          <span class="output-currency">USD</span>
+        </div>
+
+        <div class="output-row">
+          <p class="output-label">Funds saved (lost) using Norbert's Gambit:</p>
+          <span class="output-value output--conversion-gains">0.00</span>
+          <span class="output-currency">USD</span>
+        </div>
+      </div>
+
+      <ion-icon class="action-icon" name="chevron-forward-outline"></ion-icon>
+    </div>
+
+    <div class="accordion" id="accordion">
+      <div class="item open">
+        <p class="text">
+          What is Norbert's Gambit?
+          <!-- <ion-icon
+            class="accordion-icon"
+            name="chevron-down-outline"
+          ></ion-icon> -->
+        </p>
+        <div class="hidden-box">
+          <p class="explanation-text">
+            <strong>Norbert's Gambit</strong> is a technique for converting
+            money between CAD and USD that is more cost-efficient than using
+            rates provided by brokers or the bank.
+          </p>
+          <p class="explanation-text">
+            Converting CAD to USD, the technique is performed by buying a
+            CAD-denominated USD ETF (DLR) with CAD funds, journalling it to the
+            USD-denominated equivalent ETF (DLR-U), then selling shares to
+            obtain USD funds.
+          </p>
+          <p class="explanation-text">
+            Norbert's Gambit can be executed to convert USD funds to CAD by
+            buying DLR-U (USD), journalling it to DLR (CAD), and selling DLR to
+            obtain CAD funds.
+          </p>
+          <p class="explanation-text">
+            The process of "journalling" DLR to DLR-U, or vice versa, is
+            different depending on the bank or brokerage being used.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>
