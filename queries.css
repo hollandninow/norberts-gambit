@@ -5,8 +5,8 @@
   }
 }
 
-/* Screens below 1104px */
-@media (max-width: 69em) {
+/* Screens below 896px */
+@media (max-width: 56em) {
   .container {
     grid-template-columns: 1fr;
     row-gap: 8rem;

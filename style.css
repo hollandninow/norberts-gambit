@@ -144,7 +144,7 @@ header {
   border-radius: 9px;
 }
 
-.fx-label-row {
+.info-label-row {
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -170,8 +170,6 @@ header {
   padding: 0.8rem;
   line-height: 1.8rem;
   letter-spacing: 0.2px;
-  top: -490%;
-  left: 21.8%;
 }
 
 .info-pop-up:after {
@@ -183,12 +181,30 @@ header {
   border-right: 2px solid #999;
   background-color: #fff;
   transform: rotate(45deg);
-  top: 95%;
-  left: 10%;
 }
 
 .hover:hover .info-pop-up {
   display: block;
+}
+
+.fee-pop-up {
+  top: -650%;
+  left: 21.8%;
+}
+
+.fee-pop-up:after {
+  top: 96%;
+  left: 10%;
+}
+
+.fx-pop-up {
+  top: -490%;
+  left: 21.8%;
+}
+
+.fx-pop-up:after {
+  top: 95%;
+  left: 10%;
 }
 
 .input-text {
@@ -215,7 +231,7 @@ header {
   width: 30%;
 }
 
-.conversion-input-container {
+.dropdown-input-container {
   display: flex;
   gap: 3.2rem;
 }

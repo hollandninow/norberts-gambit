@@ -30,7 +30,7 @@
 
         <div class="input-row">
           <!-- <label class="input-label">How much do you wish to convert?</label> -->
-          <div class="conversion-input-container">
+          <div class="dropdown-input-container">
             <input
               class="input-field input--conversion-amt"
               type="text"
@@ -49,21 +49,47 @@
         </p> -->
 
         <div class="input-row">
-          <input
-            class="input-field input--commission"
-            type="text"
-            placeholder="Enter broker trade commission"
-            required
-          />
+          <div class="info-label-row">
+            <label class="input-label">Brokerage fee</label>
+            <div class="hover">
+              <ion-icon class="info-icon" name="information-circle-outline">
+              </ion-icon>
+              <span class="info-pop-up fee-pop-up"
+                >Enter the fee your bank or brokerage charges per trade or
+                select from the dropdown menu your institution to autofill the
+                fee.</span
+              >
+            </div>
+          </div>
+          <div class="dropdown-input-container">
+            <input
+              class="input-field input--commission"
+              type="text"
+              placeholder="e.g.: 6.95"
+              required
+            />
+            <select class="input-field input-dropdown input--brokerage">
+              <option value="none">Select one...</option>
+              <option value="bmo">BMO</option>
+              <option value="cibc">CIBC</option>
+              <option value="rbc">RBC</option>
+              <option value="scotiabank">Scotiabank</option>
+              <option value="td">TD Canada Trust</option>
+              <option value="hsbc">HSBC Canada</option>
+              <option value="nationalbank">National Bank</option>
+              <option value="qtrade">Qtrade</option>
+              <option value="wealthsimple">Wealthsimple</option>
+            </select>
+          </div>
         </div>
 
         <div class="input-row">
-          <div class="fx-label-row">
+          <div class="info-label-row">
             <label class="input-label">USD/CAD rate</label>
             <div class="hover">
               <ion-icon class="info-icon" name="information-circle-outline">
               </ion-icon>
-              <span class="info-pop-up"
+              <span class="info-pop-up fx-pop-up"
                 >The auto-populated USD/CAD rate is the Bank of Canada rate with
                 a 2.5% broker fee added.</span
               >

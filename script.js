@@ -7,6 +7,7 @@ const FX_URL = 'https://www.bankofcanada.ca/valet/';
 const inputConversionAmt = document.querySelector('.input--conversion-amt');
 const inputFxCurr = document.querySelector('.input--fx-curr');
 const inputCommission = document.querySelector('.input--commission');
+const selectBrokerage = document.querySelector('.input--brokerage');
 const inputFxRate = document.querySelector('.input--fx-rate');
 const inputDlrPrice = document.querySelector('.input--dlr-price');
 const inputDlrUPrice = document.querySelector('.input--dlru-price');
@@ -26,38 +27,13 @@ const accordionItem = document.querySelector('.item');
 const accordionHiddenBox = document.querySelector('.hidden-box');
 const headerLink = document.querySelector('.header-link');
 const infoIcon = document.querySelector('.info-icon');
-const infoPopUp = document.querySelector('.info-pop-up');
+const infoPopUpArr = document.querySelectorAll('.info-pop-up');
 
 // For tracks if input and output elements are stacked
 let ioStacked = false;
 
 ///////////////////////////////
 // INTERACTIVE ELEMENTS
-
-// const openAccordionItem = function () {
-//   accordionItem.classList.add('open');
-//   accordionHiddenBox.style.maxHeight = `${accordionHiddenBox.scrollHeight}px`;
-//   accordionHiddenBox.style.marginTop = '3.2rem';
-// };
-
-// const closeAccordionItem = function () {
-//   accordionItem.classList.remove('open');
-//   accordionHiddenBox.style.maxHeight = '0px';
-//   accordionHiddenBox.style.marginTop = '0';
-// };
-
-// const toggleAccordionItem = function () {
-//   const style = getComputedStyle(accordionHiddenBox);
-
-//   if (style.maxHeight === '0px') {
-//     openAccordionItem();
-//   } else {
-//     closeAccordionItem();
-//   }
-// };
-
-// headerInfo.addEventListener('click', openAccordionItem);
-// accordionItem.addEventListener('click', toggleAccordionItem);
 
 // Question mark icon scrolls smoothly to NG explanation when clicked
 headerLink.addEventListener('click', e => {
@@ -81,15 +57,16 @@ btnCalculate.addEventListener('click', e => {
 
 // Info popup keeps proper position on window resize.
 window.addEventListener('resize', () => {
-  console.log(`Icon offset left: ${infoIcon.offsetLeft}`);
-  console.log(`Popup offset left: ${infoPopUp.offsetLeft}`);
-
-  infoPopUp.style.left = `${infoIcon.offsetLeft - 19}px`;
-  console.log(`Popup offset left after adj: ${infoPopUp.offsetLeft}`);
+  // Through trial and error 19px just seems to look best
+  infoPopUpArr.forEach(el => {
+    el.style.left = `${infoIcon.offsetLeft - 19}px`;
+  });
 });
 
 // Info popup keeps proper position on window load.
-infoPopUp.style.left = `${infoIcon.offsetLeft - 19}px`;
+infoPopUpArr.forEach(el => {
+  el.style.left = `${infoIcon.offsetLeft - 19}px`;
+});
 
 ///////////////////////////////
 // APPLICATION
@@ -108,12 +85,26 @@ class App {
   #dlrPriceBid;
   #dlruPriceAsk;
   #dlruPriceBid;
+  #tradeFee;
+
+  #feeSchedule = {
+    bmo: 9.95,
+    cibc: 6.95,
+    rbc: 9.95,
+    scotiabank: 9.99,
+    td: 9.99,
+    hsbc: 6.88,
+    nationalbank: 0.0,
+    qtrade: 8.75,
+    wealthsimple: 0.0,
+  };
 
   constructor() {
     this.#fxCurr = inputFxCurr.value;
     this.updateMarketData();
     this._updateFxCurr();
 
+    selectBrokerage.addEventListener('change', this._updateTradeFee.bind(this));
     inputFxCurr.addEventListener('change', this._updateFxCurr.bind(this));
     btnCalculate.addEventListener('click', this._convertFunds.bind(this));
     btnRefresh.addEventListener('click', this.updateMarketData.bind(this));
@@ -195,6 +186,12 @@ class App {
         : valueGained.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
   }
 
+  // Updates trade fee in input box when the user selects a new bank/brokerage
+  _updateTradeFee() {
+    inputCommission.value = this.#feeSchedule[selectBrokerage.value];
+  }
+
+  // Updates currency to exchange when the currency drop down menu changes
   _updateFxCurr() {
     this.#fxCurr = inputFxCurr.value;
 
